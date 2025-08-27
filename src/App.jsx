@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import MemberManager from './components/MemberManager'
 import MatchResults from './components/MatchResults'
+import MobileGenerateButtons from './components/MobileGenerateButtons'
 import { generateMatches, generateLevelMatches } from './utils/matchMaker'
+import { useIsMobile } from './hooks/useIsMobile'
 
 function App() {
   const [members, setMembers] = useState([])
@@ -10,6 +12,7 @@ function App() {
   const [generatedMatches, setGeneratedMatches] = useState(null)
   const [isLevelBased, setIsLevelBased] = useState(false)
   const [error, setError] = useState('')
+  const isMobile = useIsMobile()
 
   const handleGenerateMatches = (levelBased = false) => {
     try {
@@ -79,48 +82,68 @@ function App() {
                 </div>
               </div>
 
-              {/* 組み合わせ決定ボタン */}
-              <div className="card">
-                <h2>組み合わせ決定</h2>
-                <div className="space-y">
-                  <button
-                    disabled={members.length < 4}
-                    onClick={() => handleGenerateMatches(false)}
-                    className="btn btn-success btn-full"
-                  >
-                    通常の組み合わせを生成
-                  </button>
-                  
-                  <button
-                    disabled={members.length < 4}
-                    onClick={() => handleGenerateMatches(true)}
-                    className="btn btn-primary btn-full"
-                  >
-                    レベル別組み合わせを生成
-                  </button>
-                  
-                  {generatedMatches && (
+              {/* 組み合わせ決定ボタン - デスクトップのみ */}
+              {!isMobile && (
+                <div className="card">
+                  <h2>組み合わせ決定</h2>
+                  <div className="space-y">
                     <button
-                      onClick={clearResults}
-                      className="btn btn-danger btn-full"
+                      disabled={members.length < 4}
+                      onClick={() => handleGenerateMatches(false)}
+                      className="btn btn-success btn-full"
                     >
-                      結果をクリア
+                      通常の組み合わせを生成
                     </button>
+                    
+                    <button
+                      disabled={members.length < 4}
+                      onClick={() => handleGenerateMatches(true)}
+                      className="btn btn-primary btn-full"
+                    >
+                      レベル別組み合わせを生成
+                    </button>
+                    
+                    {generatedMatches && (
+                      <button
+                        onClick={clearResults}
+                        className="btn btn-danger btn-full"
+                      >
+                        結果をクリア
+                      </button>
+                    )}
+                  </div>
+                  
+                  {members.length < 4 && (
+                    <p className="text-muted text-center mt-2">
+                      ※ 4人以上のメンバーが必要です
+                    </p>
+                  )}
+                  
+                  {error && (
+                    <p style={{ color: '#ef4444', fontSize: '0.875rem', textAlign: 'center', marginTop: '8px' }}>
+                      {error}
+                    </p>
                   )}
                 </div>
-                
-                {members.length < 4 && (
-                  <p className="text-muted text-center mt-2">
-                    ※ 4人以上のメンバーが必要です
-                  </p>
-                )}
-                
-                {error && (
-                  <p style={{ color: '#ef4444', fontSize: '0.875rem', textAlign: 'center', marginTop: '8px' }}>
+              )}
+              
+              {/* エラーメッセージ - モバイル用 */}
+              {isMobile && error && (
+                <div className="card">
+                  <p style={{ color: '#ef4444', fontSize: '0.875rem', textAlign: 'center' }}>
                     {error}
                   </p>
-                )}
-              </div>
+                </div>
+              )}
+              
+              {/* メンバー不足メッセージ - モバイル用 */}
+              {isMobile && members.length < 4 && (
+                <div className="card">
+                  <p className="text-muted text-center">
+                    ※ 4人以上のメンバーが必要です
+                  </p>
+                </div>
+              )}
             </div>
           </div>
           
@@ -136,6 +159,16 @@ function App() {
           )}
         </div>
       </div>
+      
+      {/* モバイル固定ボタン */}
+      {isMobile && (
+        <MobileGenerateButtons
+          members={members}
+          handleGenerateMatches={handleGenerateMatches}
+          generatedMatches={generatedMatches}
+          clearResults={clearResults}
+        />
+      )}
     </div>
   )
 }

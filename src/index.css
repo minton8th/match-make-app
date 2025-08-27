@@ -1,0 +1,472 @@
+/* リセットとベーススタイル */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+/* ユーティリティクラス */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* カードスタイル */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #2d3748;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2d3748;
+}
+
+/* フォームスタイル */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 4px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ボタンスタイル */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-primary:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-success {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+}
+
+.btn-success:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+}
+
+/* メンバーリストスタイル */
+.member-list {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.member-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s;
+}
+
+.member-item:hover {
+  background-color: #f3f4f6;
+}
+
+.member-info {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.member-level {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #dbeafe;
+  color: #1e40af;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  margin-left: 8px;
+}
+
+/* ユーティリティ */
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.py-4 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.space-y > * + * {
+  margin-top: 16px;
+}
+
+/* メインタイトル */
+.main-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 32px;
+}
+
+/* 組み合わせ結果のスタイル */
+.match-container {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fafafa;
+}
+
+.courts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.court-card {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.court-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.court-title {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.level-badge {
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ダブルス表示のスタイル */
+.doubles-court {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pair {
+  border: 2px solid;
+  border-radius: 8px;
+  padding: 12px;
+  position: relative;
+}
+
+.pair-a {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.pair-b {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.pair-label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: white;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.pair-a .pair-label {
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.pair-b .pair-label {
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+.pair-players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.vs-divider {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: #6b7280;
+  padding: 8px 0;
+  position: relative;
+}
+
+.vs-divider::before,
+.vs-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: #d1d5db;
+}
+
+.vs-divider::before {
+  left: 10%;
+}
+
+.vs-divider::after {
+  right: 10%;
+}
+
+.player-slot {
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.875rem;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-slot.occupied {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.player-slot.empty {
+  background-color: #f9fafb;
+  border: 1px dashed #d1d5db;
+  color: #6b7280;
+}
+
+.player-name {
+  display: block;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.player-level-small {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  opacity: 0.8;
+}
+
+.empty-slot {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+/* 出場回数統計のスタイル */
+.play-stats {
+  margin-bottom: 20px;
+  padding: 16px;
+  background-color: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  border: 1px solid #e5e7eb;
+}
+
+.stat-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.stat-count {
+  font-weight: 600;
+  color: #059669;
+}
+
+/* レスポンシブ */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .main-title {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .courts-grid {
+    grid-template-columns: 1fr;
+  }
+}
